@@ -1,0 +1,67 @@
+<section>
+    <button type="button" class="btn btn-secondary" [routerLink]="[ '/']">
+        Back
+    </button>
+</section>
+
+<section>
+    <form [formGroup]="blogForm" (ngSubmit)="editblog()">
+        <div class="row">
+            <div class="col-md-6">
+                <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+                    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                    <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                        <button class="choose-file" type="button" mat-button (click)="openFileSelector()">
+                            Choose File
+                        </button>
+                    </ng-template>
+                </ngx-file-drop>
+                <div class="image-info">Maximum size of 2000px JPG, GIF,
+                    PNG</div>
+            </div>
+            <div class="col-md-6">
+                <img *ngIf="imageSrc != 'default'" [src]="imageSrc" style="height: 150px; width:150px"
+                    onerror='this.onerror=null;this.src="../../../../assets/images/blog_profile.png";' alt="blog image">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" name="title" id="title" formControlName="title"
+                        placeholder="Enter Title">
+                    <div class="valErr" *ngIf="hasError('title','required')">Enter Title
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <input type="text" class="form-control" name="content" id="content" formControlName="content"
+                        placeholder="Enter Content">
+                    <div class="valErr" *ngIf="hasError('content','required')">Enter Content
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="author">Author</label>
+                    <input type="text" class="form-control" name="author" id="author" formControlName="author"
+                        placeholder="Enter author">
+                    <div class="valErr" *ngIf="hasError('author','required')">Enter Author
+                    </div>
+                    <div class="valErr" *ngIf="hasError('author','author')">Enter valid Author
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="submit-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</section>

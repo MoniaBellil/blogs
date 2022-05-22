@@ -1,0 +1,41 @@
+<section>
+    <div class="card">
+        <div class="card-header">
+          Detail Blogs
+        </div>
+        <div class="card-body">
+            <form [formGroup]="blogForm">
+                <div class="form-group">
+                        <img *ngIf="imageSrc != 'default'" [src]="imageSrc" style="height: 50%; width:50%"
+                            onerror='this.onerror=null;this.src="../../../../assets/images/blog_profile.png";' alt="blog image">
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input  readonly type="text" class="form-control" name="title" id="title" formControlName="title"
+                                placeholder="Enter Title">
+                            <div class="valErr" *ngIf="hasError('title','required')">Enter Title
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="content">Content</label>
+                            <input  readonly type="text" class="form-control" name="content" id="content" formControlName="content"
+                                placeholder="Enter Content">
+                            <div class="valErr" *ngIf="hasError('content','required')">Enter Content
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="author">Author</label>
+                            <input  readonly type="text" class="form-control" name="author" id="author" formControlName="author"
+                                placeholder="Enter author">
+                            <div class="valErr" *ngIf="hasError('author','required')">Enter Author
+                            </div>
+                            <div class="valErr" *ngIf="hasError('author','author')">Enter valid Author
+                            </div>
+                        </div>
+            </form>
+            <button type="button" class="btn btn-secondary" [routerLink]="[ '/']">
+                Back
+            </button>
+        </div>
+      </div>
+</section>

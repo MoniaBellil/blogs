@@ -1,0 +1,70 @@
+<section class="list-all">
+    <h2 style="text-decoration: underline;">Blogs</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <label for="Search">Search</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="Search" id="Search" [(ngModel)]="searchText" placeholder="Enter Search">
+                </div>
+                <div class="col-md-6">
+                    <input type="button" class="btn btn-success" value="Search" (click)="SearchResult()"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <button type="button" class="btn btn-primary addBlogBtn" [routerLink]="[ '/add']">
+                Add New Blog
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Blogs Image</th>
+                        <th>Title</th>
+                        <th>Content</th>
+                        <th>Author</th>
+                        <th>Vote</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let blog of blogList" [style.border]="getBorderColor(blog)">
+                        <td> <img [src]="blog.profileImg" alt="" width="50px" height="50px"></td>
+                        <td>{{blog.title?blog.title:''}}</td>
+                        <td>{{blog.content?blog.content:''}}</td>
+                        <td>{{blog.author?blog.author:''}}</td>
+                        <td><img src="../../assets/images/downVote.png" alt="image" width="50px" (click)="downVote(blog)"/>{{blog.downvote?blog.downvote:0}}<img src="../../assets/images/upVote.png" alt="image" width="50px" (click)="upVote(blog)"/>{{blog.upvote?blog.upvote:0}}</td>
+                        <td>
+                            <button type="button" class="btn btn-info action-btn"
+                                [routerLink]="[ '/detail', blog._id ]">Detail</button>
+                            <button type="button" class="btn btn-success action-btn"
+                                [routerLink]="[ '/edit', blog._id ]">Edit</button>
+                            <button type="button" class="btn btn-danger action-btn" data-toggle="modal"
+                                data-target="#myModal" (click)="selectblog(blog)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="modal-msg">Are you sure?</p>
+                <p class="modal-msg">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger action-btn" data-dismiss="modal"
+                        (click)="deleteblog()">Submit</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
